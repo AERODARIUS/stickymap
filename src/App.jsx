@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import {
   MapContainer, TileLayer, Marker, Popup,
 } from 'react-leaflet';
+import { Button } from 'antd';
+import { AimOutlined } from '@ant-design/icons';
 import usePosition from './hooks';
 
 const App = ({ allowLocation, grantLocation }) => {
@@ -37,9 +39,15 @@ const App = ({ allowLocation, grantLocation }) => {
         </Popup>
       </Marker>
       {!allowLocation && (
-        <div className="leaflet-bottom leaflet-right">
+        <div className="leaflet-bottom leaflet-left">
           <div className="leaflet-control leaflet-bar">
-            <input type="button" value="Use Location" onClick={grantLocation} />
+            <Button
+              type="primary"
+              icon={<AimOutlined />}
+              onClick={grantLocation}
+            >
+              Use current location
+            </Button>
           </div>
         </div>
       )}
