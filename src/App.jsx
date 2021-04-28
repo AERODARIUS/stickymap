@@ -1,8 +1,11 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, {
+  useEffect, useState, useMemo, lazy, Suspense,
+} from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import usePosition from './hooks';
-import Map from './Map';
+
+const Map = lazy(() => import('./Map'));
 
 const App = ({ allowLocation }) => {
   const [map, setMap] = useState(null);
@@ -15,11 +18,13 @@ const App = ({ allowLocation }) => {
   }, [map, latitude, longitude]);
 
   const displayMap = useMemo(() => (
-    <Map
-      latitude={latitude}
-      longitude={longitude}
-      setMap={setMap}
-    />
+    <Suspense fallback={<span>Loading</span>}>
+      <Map
+        latitude={latitude}
+        longitude={longitude}
+        setMap={setMap}
+      />
+    </Suspense>
   ));
 
   return (

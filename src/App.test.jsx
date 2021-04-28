@@ -9,6 +9,6 @@ test('renders the map', () => {
       <App />
     </Provider>,
   );
-  const linkElement = screen.getByText(/OpenStreetMap/i);
+  const linkElement = screen.getByText(/OpenStreetMap|Loading/i);
   expect(linkElement).toBeInTheDocument();
 });
