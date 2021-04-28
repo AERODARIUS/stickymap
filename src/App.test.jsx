@@ -1,8 +1,14 @@
 import React, { render, screen } from '@testing-library/react';
-import { StatelessApp } from './App';
+import { Provider } from 'react-redux';
+import App from './App';
+import store from './redux/store';
 
-test('renders learn react link', () => {
-  render(<StatelessApp />);
-  const linkElement = screen.getByText(/use location/i);
+test('renders the map', () => {
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+  );
+  const linkElement = screen.getByText(/OpenStreetMap/i);
   expect(linkElement).toBeInTheDocument();
 });
