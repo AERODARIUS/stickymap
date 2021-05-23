@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import usePosition from './hooks';
+import { usePosition } from './hooks';
 
 const Map = lazy(() => import('./Map'));
 
@@ -20,6 +20,7 @@ const App = ({ allowLocation }) => {
   const displayMap = useMemo(() => (
     <Suspense fallback={<span>Loading</span>}>
       <Map
+        allowLocation={allowLocation}
         latitude={latitude}
         longitude={longitude}
         setMap={setMap}

@@ -6,17 +6,14 @@ import { AimOutlined } from '@ant-design/icons';
 const LocationButton = ({ locationEnabled, grantLocation }) => (
   <>
     {!locationEnabled && (
-    <div className="leaflet-bottom leaflet-left">
-      <div className="leaflet-control leaflet-bar">
-        <Button
-          type="primary"
-          icon={<AimOutlined />}
-          onClick={grantLocation}
-        >
-          Use current location
-        </Button>
-      </div>
-    </div>
+      <Button
+        type="primary"
+        icon={<AimOutlined />}
+        onClick={grantLocation}
+        style={{ position: 'relative' }}
+      >
+        Use current location
+      </Button>
     )}
   </>
 );

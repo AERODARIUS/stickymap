@@ -16,28 +16,26 @@ const LoginButton = ({ auth }) => {
   const windowWidth = window?.innerWidth;
 
   return (
-    <div className="leaflet-top leaflet-right">
-      <div className="leaflet-control leaflet-bar">
-        {!auth && (
-        <Button
-          type="primary"
-          icon={<LoginOutlined />}
-          onClick={showDrawer}
-        >
-          Login
-        </Button>
-        )}
-        <Drawer
-          title="Login"
-          placement="right"
-          onClose={onClose}
-          visible={displayLogin}
-          width={windowWidth < maxWidth ? '100%' : maxWidth}
-        >
-          <LoginForm />
-        </Drawer>
-      </div>
-    </div>
+    <>
+      {!auth && (
+      <Button
+        type="primary"
+        icon={<LoginOutlined />}
+        onClick={showDrawer}
+      >
+        Login
+      </Button>
+      )}
+      <Drawer
+        title="Login"
+        placement="right"
+        onClose={onClose}
+        visible={displayLogin}
+        width={windowWidth < maxWidth ? '100%' : maxWidth}
+      >
+        <LoginForm auth={auth} />
+      </Drawer>
+    </>
   );
 };
 

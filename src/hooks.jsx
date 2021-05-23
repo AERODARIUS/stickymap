@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
-export default (allowLocation) => {
+export const usePosition = (allowLocation) => {
   const [position, setPosition] = useState({});
   const [error, setError] = useState(null);
 
@@ -31,4 +33,22 @@ export default (allowLocation) => {
   }, [allowLocation]);
 
   return { ...position, error };
+};
+
+export const useAuth = () => {
+  const [auth, setAuth] = useState(null);
+
+  useEffect(() => {
+    if (!auth) {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          setAuth(user);
+        } else {
+          setAuth({});
+        }
+      });
+    }
+  });
+
+  return auth;
 };
