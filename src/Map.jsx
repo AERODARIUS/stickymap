@@ -6,7 +6,8 @@ import { useAuth } from './hooks';
 
 const LocationButton = lazy(() => import('./components/LocationButton'));
 const LoginButton = lazy(() => import('./components/LoginButton'));
-const LogOutButton = lazy(() => import('./components/LogOutButton'));
+const MainMenu = lazy(() => import('./components/MainMenu'));
+const Notes = lazy(() => import('./components/Notes'));
 
 export default ({
   allowLocation, latitude, longitude, setMap,
@@ -26,11 +27,14 @@ export default ({
       />
       <Suspense fallback={<div>Loading</div>}>
         {allowLocation && (
-          <Marker position={[latitude, longitude]}>
-            <Popup>
-              You are here
-            </Popup>
-          </Marker>
+          <>
+            <Marker position={[latitude, longitude]}>
+              <Popup>
+                You are here
+              </Popup>
+            </Marker>
+            <Notes />
+          </>
         )}
 
         <div className="leaflet-top leaflet-right">
@@ -46,7 +50,7 @@ export default ({
             <LocationButton />
             {auth && (
               <>
-                {auth.uid ? <LogOutButton /> : <LoginButton />}
+                {auth.uid ? <MainMenu /> : <LoginButton />}
               </>
             )}
           </div>

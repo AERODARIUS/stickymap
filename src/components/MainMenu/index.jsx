@@ -1,22 +1,14 @@
 import React, { useState } from 'react';
 import { Button, Drawer } from 'antd';
-import { LogoutOutlined, MenuOutlined } from '@ant-design/icons';
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import { MenuOutlined } from '@ant-design/icons';
+import LogOutButton from './LogOutButton';
+import AddMarker from './AddMarker';
+import './index.css';
 
 export default () => {
   const [showMenu, setShowMenu] = useState(false);
-  const maxWidth = 512;
-  const windowWidth = window?.innerWidth;
-
-  const logOut = () => {
-    firebase.auth().signOut().then(() => {
-      // Sign-out successful.
-    }).catch((error) => {
-      // eslint-disable-next-line no-console
-      console.log(error);
-    });
-  };
+  const maxWidth = 200;
+  const width = window?.innerWidth < maxWidth ? '100%' : maxWidth;
 
   return (
     <div className="leaflet-top leaflet-right" style={{ position: 'relative' }}>
@@ -42,15 +34,12 @@ export default () => {
           placement="right"
           onClose={() => { setShowMenu(false); }}
           visible={showMenu}
-          width={windowWidth < maxWidth ? '100%' : maxWidth}
+          width={width}
         >
-          <Button
-            type="link"
-            icon={<LogoutOutlined />}
-            onClick={logOut}
-          >
-            Logout
-          </Button>
+          <div className="sticky-drawer">
+            <AddMarker />
+            <LogOutButton />
+          </div>
         </Drawer>
       </div>
     </div>
